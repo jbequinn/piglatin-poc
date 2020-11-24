@@ -23,12 +23,21 @@ public class ConversionVisitorTest {
 	}
 
 	@Test
-	void verifyWay() {
+	void verifyNoChanges() {
 		String[] convertedWords = new String[1];
 		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"stairway"}, convertedWords);
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("stairway");
+	}
+
+	@Test
+	void verifyWayWithPunctuation() {
+		String[] convertedWords = new String[1];
+		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"stairway'"}, convertedWords);
+
+		Assertions.assertThat(String.join(" ", convertedWords))
+				.isEqualTo("tairwaysay'");
 	}
 
 	@Test
@@ -78,14 +87,14 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyMultipleWords() {
-		String[] input = {"straw", "aw", "Qo'noS", "Goodbye"};
-		String[] convertedWords = new String[4];
+		String[] input = {"straw", "aw", "Qo'noS", "Goodbye", "good-ol'"};
+		String[] convertedWords = new String[input.length];
 		ConversionVisitor.ConversationVisitors visitors = new ConversionVisitor.ConversationVisitors();
 		for (int wordIndex = 0; wordIndex<input.length; wordIndex++) {
 			visitors.convert(wordIndex, input, convertedWords);
 		}
 
 		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("trawsay awway Onos'Qay Oodbyegay");
+				.isEqualTo("trawsay awway Onos'Qay Oodbyegay oodgay-olway'");
 	}
 }
