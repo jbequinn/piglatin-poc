@@ -74,9 +74,9 @@ public interface ConversionVisitor {
 		@Override
 		public void applyChange(int index, String[] original, String[] destination) {
 			// this one should keep the same relative place from the end
-			for (int charIndex = original[index].length() -1 ; charIndex > 0; charIndex--) {
+			for (int charIndex = original[index].length() - 1; charIndex > 0; charIndex--) {
 				if (isPunctuation(original[index].charAt(charIndex))) {
-					int position = destination[index].length() - 1 - (original[index].length() -1 - charIndex);
+					int position = destination[index].length() - 1 - (original[index].length() - 1 - charIndex);
 					// strings are immutable - create a new one
 					destination[index] = destination[index].substring(0, position + 1) +
 							original[index].charAt(charIndex) +
@@ -93,17 +93,10 @@ public interface ConversionVisitor {
 				String[] dehyphenedWords = original[index].split("-");
 				String[] dehyphenedConvertedWords = new String[dehyphenedWords.length];
 
-				// just do the same whole thing again, but without the hyphens visitor
-				for (int wordIndex = 0; wordIndex<dehyphenedWords.length; wordIndex++) {
-					for (ConversionVisitor visitor: List.of(
-							new CopyVisitor(),
-							new ConstantMoverVisitor(),
-							new WAppenderVisitor(),
-							new AyAppenderVisitor(),
-							new PunctuationVisitor(),
-							new CapitalizationVisitor())) {
-						visitor.applyChange(wordIndex, dehyphenedWords, dehyphenedConvertedWords);
-					}
+				// just do the same whole thing again - but this time there will be no hyphens
+				ConversationVisitors visitors = new ConversationVisitors();
+				for (int wordIndex = 0; wordIndex < dehyphenedWords.length; wordIndex++) {
+					visitors.convert(wordIndex, dehyphenedWords, dehyphenedConvertedWords);
 				}
 
 				destination[index] = String.join("-", dehyphenedConvertedWords);
