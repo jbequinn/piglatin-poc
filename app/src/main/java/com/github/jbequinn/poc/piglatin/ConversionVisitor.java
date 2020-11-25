@@ -1,7 +1,5 @@
 package com.github.jbequinn.poc.piglatin;
 
-import java.util.List;
-
 public interface ConversionVisitor {
 	void applyChange(int index, String[] original, String[] destination);
 
@@ -91,39 +89,12 @@ public interface ConversionVisitor {
 		public void applyChange(int index, String[] original, String[] destination) {
 			if (original[index].contains("-")) {
 				String[] dehyphenedWords = original[index].split("-");
-				String[] dehyphenedConvertedWords = new String[dehyphenedWords.length];
 
 				// just do the same whole thing again - but this time there will be no hyphens
-				ConversationVisitors visitors = new ConversationVisitors();
-				for (int wordIndex = 0; wordIndex < dehyphenedWords.length; wordIndex++) {
-					visitors.convert(wordIndex, dehyphenedWords, dehyphenedConvertedWords);
-				}
+				String[] dehyphenedConvertedWords = new ConvertService().convert(dehyphenedWords);
 
 				destination[index] = String.join("-", dehyphenedConvertedWords);
 			}
-		}
-	}
-
-	class ConversationVisitors {
-		private final List<ConversionVisitor> visitors = List.of(
-				// first step: copy the word
-				new CopyVisitor(),
-				// move start consonant to the end
-				new ConstantMoverVisitor(),
-				// add 'w' - only if the word starts with a consonant
-				new WAppenderVisitor(),
-				// add 'ay' - it seems it's added always (except in -way words)
-				new AyAppenderVisitor(),
-				// put back punctuation
-				new PunctuationVisitor(),
-				// put back capitalization
-				new CapitalizationVisitor(),
-				// process words with hyphens
-				new HyphensVisitor()
-		);
-
-		public void convert(int index, String[] original, String[] destination) {
-			visitors.forEach(visitor -> visitor.applyChange(index, original, destination));
 		}
 	}
 }

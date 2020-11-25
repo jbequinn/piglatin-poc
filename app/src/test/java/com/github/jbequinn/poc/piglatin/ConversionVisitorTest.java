@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ConversionVisitorTest {
 	@Test
 	void verifyConstant() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"Hello"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("Hello");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("Ellohay");
@@ -15,8 +14,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyVowel() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"apple"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("apple");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("appleway");
@@ -24,8 +22,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyNoChanges() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"stairway"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("stairway");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("stairway");
@@ -33,8 +30,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyWayWithPunctuation() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"stairway'"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("stairway'");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("tairwaysay'");
@@ -42,8 +38,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyOneCapitalization() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"Beach"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("Beach");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("Eachbay");
@@ -51,8 +46,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyTwoCapitalization() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"McCloud"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("McCloud");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("CcLoudmay");
@@ -60,8 +54,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyPunctuationMiddle() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"can't"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("can't");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("antca'y");
@@ -69,8 +62,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyPunctuationEnd() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"end."}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("end.");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("endway.");
@@ -78,21 +70,25 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyHyphens() {
-		String[] convertedWords = new String[1];
-		new ConversionVisitor.ConversationVisitors().convert(0, new String[]{"this-thing"}, convertedWords);
+		String[] convertedWords = new ConvertService().convert("this-thing");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("histay-hingtay");
 	}
 
 	@Test
-	void verifyMultipleWords() {
-		String[] input = {"straw", "aw", "Qo'noS", "Goodbye", "good-ol'"};
-		String[] convertedWords = new String[input.length];
-		ConversionVisitor.ConversationVisitors visitors = new ConversionVisitor.ConversationVisitors();
-		for (int wordIndex = 0; wordIndex<input.length; wordIndex++) {
-			visitors.convert(wordIndex, input, convertedWords);
-		}
+	void verifyMultipleWordsSplit() {
+		String[] convertedWords = new ConvertService()
+				.convert("straw", "aw", "Qo'noS", "Goodbye", "good-ol'");
+
+		Assertions.assertThat(String.join(" ", convertedWords))
+				.isEqualTo("trawsay awway Onos'Qay Oodbyegay oodgay-olway'");
+	}
+
+	@Test
+	void verifyMultipleWordsSingleLine() {
+		String[] convertedWords = new ConvertService()
+				.convert("straw aw Qo'noS Goodbye good-ol'");
 
 		Assertions.assertThat(String.join(" ", convertedWords))
 				.isEqualTo("trawsay awway Onos'Qay Oodbyegay oodgay-olway'");

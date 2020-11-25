@@ -12,13 +12,7 @@ public class App {
 
 		// verify input, etc
 
-		String[] input = text.split(" ");
-		String[] output = new String[input.length];
-		ConversionVisitor.ConversationVisitors visitors = new ConversionVisitor.ConversationVisitors();
-		for (int wordIndex = 0; wordIndex < input.length; wordIndex++) {
-			visitors.convert(wordIndex, input, output);
-		}
-
-		System.out.println("The output is: " + String.join(" ", output));
+		ConvertService service = new ConvertService();
+		System.out.println("The output is: " + String.join(" ", service.convert(text)));
 	}
 }
