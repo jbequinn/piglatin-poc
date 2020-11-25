@@ -18,6 +18,7 @@ It is maybe a bit overcomplicated in what it does, but I personally like it beca
 - Additional changes can be "plugged in" by providing additional visitors.
 - [SRP](https://en.wikipedia.org/wiki/Single-responsibility_principle): every visitor deals with only one specific change to the string.
 - It's subjectively easier to work with. For example, each visitor can be debugged individually.
+- And all the logic in one single method would be shorter, but possibly harder to maintain and understand.
 
 ## Future improvements
 - Each visitor could implement some method to determine if it's applicable for the current word. Something like `boolean isApplicable(String word)`. This could be used to just filter out unapplicable visitors, and this would decouple a bit more the conversion logic from the "check" logic.
