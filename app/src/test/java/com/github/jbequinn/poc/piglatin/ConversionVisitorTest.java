@@ -8,72 +8,72 @@ public class ConversionVisitorTest {
 	void verifyConstant() {
 		String[] convertedWords = new ConvertService().convert("Hello");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("Ellohay");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("Ellohay");
 	}
 
 	@Test
 	void verifyVowel() {
 		String[] convertedWords = new ConvertService().convert("apple");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("appleway");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("appleway");
 	}
 
 	@Test
 	void verifyNoChanges() {
 		String[] convertedWords = new ConvertService().convert("stairway");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("stairway");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("stairway");
 	}
 
 	@Test
 	void verifyWayWithPunctuation() {
 		String[] convertedWords = new ConvertService().convert("stairway'");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("tairwaysay'");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("tairwaysay'");
 	}
 
 	@Test
 	void verifyOneCapitalization() {
 		String[] convertedWords = new ConvertService().convert("Beach");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("Eachbay");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("Eachbay");
 	}
 
 	@Test
 	void verifyTwoCapitalization() {
 		String[] convertedWords = new ConvertService().convert("McCloud");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("CcLoudmay");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("CcLoudmay");
 	}
 
 	@Test
 	void verifyPunctuationMiddle() {
 		String[] convertedWords = new ConvertService().convert("can't");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("antca'y");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("antca'y");
 	}
 
 	@Test
 	void verifyPunctuationEnd() {
 		String[] convertedWords = new ConvertService().convert("end.");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("endway.");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("endway.");
 	}
 
 	@Test
 	void verifyHyphens() {
 		String[] convertedWords = new ConvertService().convert("this-thing");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("histay-hingtay");
+		Assertions.assertThat(convertedWords)
+				.containsOnly("histay-hingtay");
 	}
 
 	@Test
@@ -81,8 +81,8 @@ public class ConversionVisitorTest {
 		String[] convertedWords = new ConvertService()
 				.convert("straw", "aw", "Qo'noS", "Goodbye", "good-ol'");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("trawsay awway Onos'Qay Oodbyegay oodgay-olway'");
+		Assertions.assertThat(convertedWords)
+				.containsExactly("trawsay", "awway", "Onos'Qay", "Oodbyegay", "oodgay-olway'");
 	}
 
 	@Test
@@ -90,7 +90,7 @@ public class ConversionVisitorTest {
 		String[] convertedWords = new ConvertService()
 				.convert("straw aw Qo'noS Goodbye good-ol'");
 
-		Assertions.assertThat(String.join(" ", convertedWords))
-				.isEqualTo("trawsay awway Onos'Qay Oodbyegay oodgay-olway'");
+		Assertions.assertThat(convertedWords)
+				.containsExactly("trawsay", "awway", "Onos'Qay", "Oodbyegay", "oodgay-olway'");
 	}
 }
