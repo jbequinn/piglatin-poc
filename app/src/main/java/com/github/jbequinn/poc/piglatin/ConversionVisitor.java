@@ -20,6 +20,7 @@ public interface ConversionVisitor {
 			destination[index] = "";
 			for (int charIndex = 0; charIndex < original[index].length(); charIndex++) {
 				if (!isPunctuation(original[index].charAt(charIndex))) {
+					// use a stringbuilder here to avoid creating new strings all the time
 					destination[index] += Character.toLowerCase(original[index].charAt(charIndex));
 				}
 			}
