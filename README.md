@@ -15,7 +15,7 @@ This repository is a "homework assignment" for a Java [Pig Latin](https://en.wik
 ## Technical insights
 
 It is maybe a bit overcomplicated in what it does, but I personally like it because:
-- Additional changes can be "plugged in" bu providing additional visitors.
+- Additional changes can be "plugged in" by providing additional visitors.
 - [SRP](https://en.wikipedia.org/wiki/Single-responsibility_principle): every visitor deals with only one specific change to the string.
 - It's subjectively easier to work with. For example, each visitor can be debugged individually.
 
