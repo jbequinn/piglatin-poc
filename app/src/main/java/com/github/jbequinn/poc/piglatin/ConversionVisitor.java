@@ -91,7 +91,7 @@ public interface ConversionVisitor {
 				String[] dehyphenedWords = original[index].split("-");
 
 				// just do the same whole thing again - but this time there will be no hyphens
-				String[] dehyphenedConvertedWords = new ConvertService().convert(dehyphenedWords);
+				String[] dehyphenedConvertedWords = new ConversionService().convert(dehyphenedWords);
 
 				destination[index] = String.join("-", dehyphenedConvertedWords);
 			}

@@ -12,7 +12,7 @@ public class App {
 
 		// verify input, etc
 
-		ConvertService service = new ConvertService();
+		ConversionService service = new ConversionService();
 		System.out.println("The output is: " + String.join(" ", service.convert(text)));
 	}
 }

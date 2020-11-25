@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ConversionVisitorTest {
 	@Test
 	void verifyConstant() {
-		String[] convertedWords = new ConvertService().convert("Hello");
+		String[] convertedWords = new ConversionService().convert("Hello");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("Ellohay");
@@ -14,7 +14,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyVowel() {
-		String[] convertedWords = new ConvertService().convert("apple");
+		String[] convertedWords = new ConversionService().convert("apple");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("appleway");
@@ -22,7 +22,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyNoChanges() {
-		String[] convertedWords = new ConvertService().convert("stairway");
+		String[] convertedWords = new ConversionService().convert("stairway");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("stairway");
@@ -30,7 +30,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyWayWithPunctuation() {
-		String[] convertedWords = new ConvertService().convert("stairway'");
+		String[] convertedWords = new ConversionService().convert("stairway'");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("tairwaysay'");
@@ -38,7 +38,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyOneCapitalization() {
-		String[] convertedWords = new ConvertService().convert("Beach");
+		String[] convertedWords = new ConversionService().convert("Beach");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("Eachbay");
@@ -46,7 +46,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyTwoCapitalization() {
-		String[] convertedWords = new ConvertService().convert("McCloud");
+		String[] convertedWords = new ConversionService().convert("McCloud");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("CcLoudmay");
@@ -54,7 +54,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyPunctuationMiddle() {
-		String[] convertedWords = new ConvertService().convert("can't");
+		String[] convertedWords = new ConversionService().convert("can't");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("antca'y");
@@ -62,7 +62,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyPunctuationEnd() {
-		String[] convertedWords = new ConvertService().convert("end.");
+		String[] convertedWords = new ConversionService().convert("end.");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("endway.");
@@ -70,7 +70,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyHyphens() {
-		String[] convertedWords = new ConvertService().convert("this-thing");
+		String[] convertedWords = new ConversionService().convert("this-thing");
 
 		Assertions.assertThat(convertedWords)
 				.containsOnly("histay-hingtay");
@@ -78,7 +78,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyMultipleWordsSplit() {
-		String[] convertedWords = new ConvertService()
+		String[] convertedWords = new ConversionService()
 				.convert("straw", "aw", "Qo'noS", "Goodbye", "good-ol'");
 
 		Assertions.assertThat(convertedWords)
@@ -87,7 +87,7 @@ public class ConversionVisitorTest {
 
 	@Test
 	void verifyMultipleWordsSingleLine() {
-		String[] convertedWords = new ConvertService()
+		String[] convertedWords = new ConversionService()
 				.convert("straw aw Qo'noS Goodbye good-ol'");
 
 		Assertions.assertThat(convertedWords)

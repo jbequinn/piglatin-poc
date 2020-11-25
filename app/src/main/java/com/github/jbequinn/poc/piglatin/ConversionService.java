@@ -2,7 +2,7 @@ package com.github.jbequinn.poc.piglatin;
 
 import java.util.List;
 
-public class ConvertService {
+public class ConversionService {
 	private final List<ConversionVisitor> visitors = List.of(
 			// first step: copy the word
 			new ConversionVisitor.CopyVisitor(),
