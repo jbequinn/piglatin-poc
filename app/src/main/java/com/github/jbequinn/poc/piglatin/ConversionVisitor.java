@@ -57,14 +57,16 @@ public interface ConversionVisitor {
 	class CapitalizationVisitor implements ConversionVisitor {
 		@Override
 		public void applyChange(int index, String[] original, String[] destination) {
-			for (int charIndex = 0; charIndex < original[index].length(); charIndex++) {
-				if (Character.isUpperCase(original[index].charAt(charIndex))) {
-					// strings are immutable - create a new one
-					destination[index] = destination[index].substring(0, charIndex) +
-							Character.toUpperCase(destination[index].charAt(charIndex)) +
-							destination[index].substring(charIndex + 1);
+			// there could be many changes, so avoid creating one new string every time
+			StringBuilder builder = new StringBuilder();
+			for (int charIndex = 0; charIndex < destination[index].length(); charIndex++) {
+				if (charIndex < original[index].length() && Character.isUpperCase(original[index].charAt(charIndex))) {
+					builder.append(Character.toUpperCase(destination[index].charAt(charIndex)));
+				} else {
+					builder.append(destination[index].charAt(charIndex));
 				}
 			}
+			destination[index] = builder.toString();
 		}
 	}
 
@@ -76,6 +78,7 @@ public interface ConversionVisitor {
 				if (isPunctuation(original[index].charAt(charIndex))) {
 					int position = destination[index].length() - 1 - (original[index].length() - 1 - charIndex);
 					// strings are immutable - create a new one
+					// or do some kind of characters stack to avoid creating many new strings
 					destination[index] = destination[index].substring(0, position + 1) +
 							original[index].charAt(charIndex) +
 							destination[index].substring(position + 1);
