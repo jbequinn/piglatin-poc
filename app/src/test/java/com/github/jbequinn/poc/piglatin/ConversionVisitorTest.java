@@ -4,6 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ConversionVisitorTest {
+	// possible improvement: as these tests are almost the same, use
+	// JUnit @ParameterizedTest to provide the input and the expected output
+
 	@Test
 	void verifyConstant() {
 		String[] convertedWords = new ConversionService().convert("Hello");
