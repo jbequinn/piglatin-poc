@@ -3,13 +3,18 @@
  */
 package com.github.jbequinn.poc.piglatin;
 
+import java.util.Scanner;
+
 public class App {
 	public static void main(String[] args) {
-		String text = System.console().readLine("Enter some text: ");
+		System.out.print("Enter some text: ");
+		String text = new Scanner(System.in).nextLine();
 
 		String[] input = text.split(" ");
 		String[] output = new String[input.length];
-		new ConversionVisitor.ConversationVisitors().convert(0, input, output);
+		for (int wordIndex = 0; wordIndex < input.length; wordIndex++) {
+			new ConversionVisitor.ConversationVisitors().convert(wordIndex, input, output);
+		}
 
 		System.out.println("The output is: " + String.join(" ", output));
 	}

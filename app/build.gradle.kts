@@ -33,6 +33,10 @@ application {
     mainClass.set("com.github.jbequinn.poc.piglatin.App")
 }
 
+tasks.getByName<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 tasks.test {
     // Use junit platform for unit tests.
     useJUnitPlatform()
