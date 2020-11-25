@@ -106,7 +106,7 @@ public interface ConversionVisitor {
 
 	class ConversationVisitors {
 		private final List<ConversionVisitor> visitors = List.of(
-				// first step: copy the word without changes
+				// first step: copy the word
 				new CopyVisitor(),
 				// move start consonant to the end
 				new ConstantMoverVisitor(),
