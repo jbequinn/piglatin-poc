@@ -110,15 +110,15 @@ public interface ConversionVisitor {
 				new CopyVisitor(),
 				// move start consonant to the end
 				new ConstantMoverVisitor(),
-				// add 'w'
+				// add 'w' - only if the word starts with a consonant
 				new WAppenderVisitor(),
-				// add 'ay'
+				// add 'ay' - it seems it's added always (except in -way words)
 				new AyAppenderVisitor(),
-				// punctuation
+				// put back punctuation
 				new PunctuationVisitor(),
-				// capitalization
+				// put back capitalization
 				new CapitalizationVisitor(),
-				// hyphens
+				// process words with hyphens
 				new HyphensVisitor()
 		);
 
